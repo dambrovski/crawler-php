@@ -1,27 +1,29 @@
 <?php
 	
-	require_once 'crawlers/lib/simple_html_dom.php';
+	require_once 'C:/PHP/crawler-php/simplehtmldom/simple_html_dom.php';
 
 	class Temperatura {
 
 		public function __construct(){
-			$this->getTemperatura('http://www.tempoagora.com.br/previsao-do-tempo/brasil/Petrolina-PE');
+			$this->getTemperatura('https://www.tempoagora.com.br/previsao-do-tempo/PE/Petrolina');
 		}
 
 		public function getTemperatura($url){
 			
 			$html = file_get_html($url);
 
-			preg_match_all('/<p class=\"pb-5 bold\">(.*?)<\/p>/', $html, $result);
+			//echo $html;
+			preg_match_all('/<ul class=\"data-v-70bf4055\">(.*?)<\/ul>/', $html, $result);
 			//echo 'Temperatura em petrolina ' . $result[1][2];
 
-			$temperatura = explode('°',$result[1][2]);
+			echo $result;
+			//$temperatura = explode('°',$result[1][2]);
 
-			echo json_encode(
-				array(
-					"temperatura" => $temperatura[0]				
-					)
-			);
+			//echo json_encode(
+			//	array(
+			//		"Sensação Térmica" => $temperatura[0]				
+				//	)
+			//);
 
 		}
 	}
